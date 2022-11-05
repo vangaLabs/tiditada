@@ -60,6 +60,20 @@ const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY
 //const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY || "Your polygonscan API key"
 //const REPORT_GAS = process.env.REPORT_GAS || false
 
+const BSC_TESTNET_RPC_URL = process.env.BSC_TESTNET_RPC_URL
+const BSC_TESTNET_PRIVATE_KEY = process.env.BSC_TESTNET_PRIVATE_KEY
+const BSCSCAN_API_KEY = process.env.BSCSCAN_API_KEY
+
+const MUMBAI_RPC_URL = process.env.MUMBAI_RPC_URL
+const MUMBAI_PRIVATE_KEY = process.env.MUMBAI_PRIVATE_KEY
+//const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY
+
+const POLYGON_MAINNET_RPC_URL = process.env.POLYGON_MAINNET_RPC_URL
+const POLYGON_MAINNET_PRIVATE_KEY = process.env.POLYGON_MAINNET_PRIVATE_KEY
+const POLYGONSCAN_API_KEY = process.env.POLYGONSCAN_API_KEY
+
+const MNEMONIC = process.env.MNEMONIC
+
 module.exports = {
     defaultNetwork: "hardhat",
     networks: {
@@ -70,9 +84,12 @@ module.exports = {
             // }
             chainId: 31337,
         },
-        localhost: {
-            chainId: 31337,
-        },
+        // localhost: {
+        //     chainId: 31337,
+        //     accounts: {
+        //         mnemonic: MNEMONIC,
+        //     },
+        // },
         goerli: {
             url: GOERLI_RPC_URL,
             accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [],
@@ -81,6 +98,43 @@ module.exports = {
             //   },
             saveDeployments: true,
             chainId: 5,
+        },
+        binanceSmartchainTestnet: {
+            url: BSC_TESTNET_RPC_URL,
+            accounts: BSC_TESTNET_PRIVATE_KEY !== undefined ? [BSC_TESTNET_PRIVATE_KEY] : [],
+            //   accounts: {
+            //     mnemonic: MNEMONIC,
+            //   },
+            saveDeployments: true,
+            chainId: 97,
+        },
+        binanceSmartchain: {
+            url: BSC_TESTNET_RPC_URL, //HERE
+            accounts: PRIVATE_KEY !== undefined ? [PRIVATE_KEY] : [], //HERE!!!
+            //   accounts: {
+            //     mnemonic: MNEMONIC,
+            //   },
+            saveDeployments: true,
+            chainId: 5,
+        },
+        mumbai: {
+            url: MUMBAI_RPC_URL, //HERE
+            accounts: MUMBAI_PRIVATE_KEY !== undefined ? [MUMBAI_PRIVATE_KEY] : [], //HERE!!!
+            // accounts: {
+            //     mnemonic: MNEMONIC,
+            // },
+            saveDeployments: true,
+            chainId: 80001,
+        },
+        polygonMainnet: {
+            url: POLYGON_MAINNET_RPC_URL,
+            accounts:
+                POLYGON_MAINNET_PRIVATE_KEY !== undefined ? [POLYGON_MAINNET_PRIVATE_KEY] : [],
+            // accounts: {
+            //     mnemonic: MNEMONIC,
+            // },
+            saveDeployments: true,
+            chainId: 137,
         },
         // mainnet: {
         //     url: MAINNET_RPC_URL,
@@ -101,10 +155,20 @@ module.exports = {
     etherscan: {
         // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
         apiKey: {
-            goerli: ETHERSCAN_API_KEY,
+            polygon: POLYGONSCAN_API_KEY,
+            polygonMumbai: POLYGONSCAN_API_KEY,
+            bscTestnet: BSCSCAN_API_KEY,
+            //goerli: ETHERSCAN_API_KEY,
             // polygon: POLYGONSCAN_API_KEY,
         },
     },
+    // bscscan: {
+    //     // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
+    //     apiKey: {
+    //         binanceSmartchainTestnet: BSCSCAN_API_KEY,
+    //         // polygon: POLYGONSCAN_API_KEY,
+    //     },
+    // },
     // gasReporter: {
     //     enabled: REPORT_GAS,
     //     currency: "USD",
@@ -128,10 +192,7 @@ module.exports = {
     solidity: {
         compilers: [
             {
-                version: "0.8.7",
-            },
-            {
-                version: "0.4.24",
+                version: "0.8.14",
             },
         ],
     },

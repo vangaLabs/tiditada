@@ -1,4 +1,5 @@
 const { network, ethers } = require("hardhat")
+
 const {
     developmentChains,
     networkConfig,
@@ -39,6 +40,8 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     const callbackGasLimit = networkConfig[chainId]["callbackGasLimit"]
     const interval = networkConfig[chainId]["interval"]
     const advertsServerAndSubscription = networkConfig[chainId]["advertsServerAndSubscription"]
+    // const priceFeed = networkConfig[chainId]["priceFeed"]
+
     const args = [
         tidiTadaFee,
         advertsServerAndSubscription,
@@ -47,6 +50,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
         subscriptionId,
         callbackGasLimit,
         interval,
+        // priceFeed,
     ]
 
     const tidiTada = await deploy("Tiditada", {
@@ -58,7 +62,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
 
     //verify deployment
 
-    if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
+    if (!developmentChains.includes(network.name) && process.env.POLYGONSCAN_API_KEY) {
         log("Verifying......")
         await verify(tidiTada.address, args)
     }
